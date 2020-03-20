@@ -42,6 +42,8 @@ let make = (~baseUrl) => {
     switch (url) {
     | Some(url) => (
         () => {
+          setGrades(_ => LoadingGrades);
+
           let cancelled = ref(false);
           Js.Promise.(
             fetch(url)
