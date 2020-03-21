@@ -14,15 +14,13 @@ let make = (~grades: array((string, array(Grades.t)))) => {
     {React.array(
        grades
        |> Array.map(((title, grades)) =>
-            <div className="chart-container">
-              <canvas
-                ref={ReactDOMRe.Ref.callbackDomRef(
-                  handleCanvas(title, Grades.toData(grades)),
-                )}
-                key=title
-                width="1000"
-              />
-            </div>
+            <canvas
+              ref={ReactDOMRe.Ref.callbackDomRef(
+                handleCanvas(title, Grades.toData(grades)),
+              )}
+              key=title
+              width="1000"
+            />
           ),
      )}
   </div>;
