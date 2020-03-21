@@ -24,10 +24,15 @@ let buildUrl = baseUrl => (<$>)(string_of_int >. (++)(baseUrl ++ "/"));
 module SetStr = Belt.Set.String;
 module SetInt = Belt.Set.Int;
 module MapStr = Belt.Map.String;
+module GradeFetcher =
+  Fetcher.Make({
+    type t = array(Grades.t);
+    let decode = _ => [||];
+  });
 
 [@react.component]
 let make = (~baseUrl) => {
-  let (grades, setGrades) = React.useState(() => MissingParams);
+  let (grades, setGrades) = React.useState(() => Fetcher.MissingParams);
   let (segments: segments, setSegments) = React.useState(() => [||]);
   let (studentID: studentID, setStudentID) = React.useState(() => None);
   let (schoolYear, setSchoolYear) = React.useState(() => None);
@@ -38,50 +43,14 @@ let make = (~baseUrl) => {
 
   let url = buildUrl(baseUrl, studentID);
 
-  let effect =
-    switch (url) {
-    | Some(url) => (
-        () => {
-          setGrades(_ => LoadingGrades);
-
-          let cancelled = ref(false);
-          Js.Promise.(
-            fetch(url)
-            |> then_(response => response##json())
-            |> then_(jsonResponse => {
-                 if (! cancelled^) {
-                   setGrades(_ => LoadedGrades(jsonResponse));
-                 };
-                 resolve();
-               })
-            |> catch(err => {
-                 if (! cancelled^) {
-                   setGrades(_ => ErrorFetchingGrades(err));
-                 };
-                 resolve();
-               })
-            |> ignore
-          );
-
-          Some(() => cancelled := true);
-        }
-      )
-    | None => (
-        () => {
-          setGrades(_ => MissingParams);
-          None;
-        }
-      )
-    };
-
   /* fetch the grades for the indicated student */
-  React.useEffect1(effect, [|studentID|]);
+  React.useEffect1(GradeFetcher.effect(setGrades, url), [|studentID|]);
 
   /* get the available school years from the grades */
   React.useEffect1(
     () => {
       switch (grades) {
-      | LoadedGrades(grades) =>
+      | Fetcher.Loaded(grades) =>
         let schoolYears =
           grades
           |> Array.fold_left(
@@ -108,7 +77,7 @@ let make = (~baseUrl) => {
   React.useEffect2(
     () => {
       switch (grades) {
-      | LoadedGrades(grades) =>
+      | Fetcher.Loaded(grades) =>
         let markingPeriods =
           grades
           |> Array.fold_left(
@@ -136,7 +105,7 @@ let make = (~baseUrl) => {
   React.useEffect3(
     () => {
       switch (grades) {
-      | LoadedGrades(grades) =>
+      | Fetcher.Loaded(grades) =>
         let segments =
           grades
           |> Array.to_list
