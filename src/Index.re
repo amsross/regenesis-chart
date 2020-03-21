@@ -19,4 +19,4 @@ let makeContainer = text => {
   container;
 };
 
-ReactDOMRe.render(<Fetcher baseUrl />, makeContainer("Fetcher"));
+ReactDOMRe.render(<Main baseUrl />, makeContainer("Main"));
