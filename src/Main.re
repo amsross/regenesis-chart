@@ -27,7 +27,7 @@ module MapStr = Belt.Map.String;
 module GradeFetcher =
   Fetcher.Make({
     type t = array(Grades.t);
-    let decode = _ => [||];
+    let decode = Grades.decode;
   });
 
 [@react.component]

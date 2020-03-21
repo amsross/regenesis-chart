@@ -13,6 +13,8 @@ type t = {
   grade: float,
 };
 
+external decode: Js.Json.t => array(t) = "%identity";
+
 let groupByCourse: array(t) => array((string, array(t))) =
   Array.to_list
   >. List.fold_left(
