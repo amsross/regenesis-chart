@@ -1,3 +1,4 @@
+module Dataset = BsChartjs.Data.Dataset;
 module MapStr = Belt.Map.String;
 let (>.) = BsAbstract.Function.Infix.(>.);
 let ((<#>), (|?)) = BsAbstract.Option.Infix.((<#>), (|?));
@@ -27,10 +28,8 @@ let groupByCourse: array(t) => array((string, array(t))) =
   >. MapStr.toArray
   >. Array.(map(((course, grades)) => (course, of_list(grades))));
 
-let toDatum = ({unixstamp, grade}) => {
-  "x": Js.Date.fromFloat(unixstamp),
-  "y": grade,
-};
+let toDatum = ({unixstamp, grade}) =>
+  Dataset.Datum.make(~x=Js.Date.fromFloat(unixstamp), ~y=grade, ());
 
 let toData = grades => {
   Random.init(319904352);
@@ -39,14 +38,15 @@ let toData = grades => {
   |> Array.map(((course, grades)) => {
        let color = Random.(int(256), int(256), int(256), 0.5);
 
-       {
-         "label": course,
-         "borderColor": Color.RGBA.show(color),
-         "borderDash": Js.Undefined.return((5, 2)),
-         "backgroundColor": Color.RGBA.(show(alpha(1.0, color))),
-         "lineTension": 0.,
-         "fill": false,
-         "data": Array.map(toDatum, grades),
-       };
+       Dataset.make(
+         ~label=course,
+         ~borderColor=Color.RGBA.show(color),
+         ~borderDash=(5, 2),
+         ~backgroundColor=Color.RGBA.(show(alpha(1.0, color))),
+         ~lineTension=0.,
+         ~fill=false,
+         ~data=Array.map(toDatum, grades),
+         (),
+       );
      });
 };
