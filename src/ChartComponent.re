@@ -7,7 +7,7 @@ let (>.) = BsAbstract.Function.Infix.(>.);
 let makeChart = (title, datasets) => {
   open BsChartjs;
 
-  let xAxes = [|
+  let yAxes = [|
     Options.Options.Scales.Axis.(
       make(
         ~_type=`linear,
@@ -20,7 +20,7 @@ let makeChart = (title, datasets) => {
     ),
   |];
 
-  let yAxes = [|
+  let xAxes = [|
     Options.Options.Scales.Axis.(
       make(
         ~_type=`time,
