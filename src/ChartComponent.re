@@ -5,7 +5,7 @@ let (>.) = BsAbstract.Function.Infix.(>.);
 [@bs.val] [@bs.scope "window"] external innerWidth: float = "innerWidth";
 
 let makeChart = (title, datasets) => {
-  open BsChartjs;
+  open ChartJs;
 
   let yAxes = [|
     Options.Options.Scales.Axis.(
@@ -53,7 +53,7 @@ let makeChart = (title, datasets) => {
       )
     );
 
-  canvas => Chart.make(canvas, options);
+  canvas => ChartJs.make(canvas, options);
 };
 
 let handleCanvas = (title, grades, canvas) =>

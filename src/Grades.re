@@ -1,4 +1,4 @@
-module Dataset = BsChartjs.Data.Dataset;
+module Dataset = ChartJs.Data.Dataset;
 module MapStr = Belt.Map.String;
 let (>.) = BsAbstract.Function.Infix.(>.);
 let ((<#>), (|?)) = BsAbstract.Option.Infix.((<#>), (|?));

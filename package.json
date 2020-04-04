@@ -30,7 +30,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "@amsross/bs-chartjs": "^1.2.0",
+    "@amsross/bs-chartjs": "^2.0.0",
     "@glennsl/bs-json": "^5.0.2"
   }
 }
