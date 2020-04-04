@@ -1,22 +1,12 @@
 {
-  "name": "regenesis-chart",
-  "reason": {
-    "react-jsx": 3
-  },
-  "sources": {
-    "dir" : "src",
-    "subdirs" : true
-  },
+  "bs-dependencies": ["@amsross/bs-chartjs", "bs-abstract", "reason-react"],
   "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
-  "package-specs": [{
-    "module": "commonjs",
-    "in-source": false
-  }],
-  "suffix": ".bs.js",
+  "name": "regenesis-chart",
   "namespace": true,
-  "bs-dependencies": [
-    "bs-abstract",
-    "reason-react"
-  ],
-  "refmt": 3
+  "package-specs": [{"in-source": false, "module": "commonjs"}],
+  "reason": {"react-jsx": 3},
+  "refmt": 3,
+  "sources": {"dir": "src", "subdirs": true},
+  "suffix": ".bs.js",
+  "warnings": {"error": "+101", "number": "-44"}
 }
