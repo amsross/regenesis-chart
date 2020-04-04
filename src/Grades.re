@@ -14,7 +14,21 @@ type t = {
   grade: float,
 };
 
-external decode: Js.Json.t => array(t) = "%identity";
+let decode: Js.Json.t => array(t) =
+  Json.Decode.(
+    array(json =>
+      {
+        partition_key: json |> field("partition_key", string),
+        sort_key: json |> field("sort_key", string),
+        studentid: json |> field("studentid", int),
+        schoolyear: json |> field("schoolyear", string),
+        mp: json |> field("mp", int),
+        course: json |> field("course", string),
+        unixstamp: json |> field("unixstamp", float),
+        grade: json |> field("grade", float),
+      }
+    )
+  );
 
 let groupByCourse: array(t) => array((string, array(t))) =
   Array.to_list

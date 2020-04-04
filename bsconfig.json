@@ -1,5 +1,10 @@
 {
-  "bs-dependencies": ["@amsross/bs-chartjs", "bs-abstract", "reason-react"],
+  "bs-dependencies": [
+    "@glennsl/bs-json",
+    "@amsross/bs-chartjs",
+    "bs-abstract",
+    "reason-react"
+  ],
   "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
   "name": "regenesis-chart",
   "namespace": true,
