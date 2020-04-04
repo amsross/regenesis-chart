@@ -20,12 +20,20 @@ let decode: Js.Json.t => array(t) =
       {
         partition_key: json |> field("partition_key", string),
         sort_key: json |> field("sort_key", string),
-        studentid: json |> field("studentid", int),
+        studentid:
+          json |> field("studentid", oneOf([int, string >. int_of_string])),
         schoolyear: json |> field("schoolyear", string),
-        mp: json |> field("mp", int),
+        mp: json |> field("mp", oneOf([int, string >. int_of_string])),
         course: json |> field("course", string),
-        unixstamp: json |> field("unixstamp", float),
-        grade: json |> field("grade", float),
+        unixstamp:
+          json
+          |> field(
+               "unixstamp",
+               oneOf([float, string >. Js.Float.fromString]),
+             ),
+        grade:
+          json
+          |> field("grade", oneOf([float, string >. Js.Float.fromString])),
       }
     )
   );
