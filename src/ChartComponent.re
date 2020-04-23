@@ -14,7 +14,6 @@ let makeChart = (title, datasets) => {
         ~ticks=
           Ticks.make(~suggestedMin=70, ~suggestedMax=105, ~stepSize=5, ()),
         ~display=true,
-        ~scaleLabel=ScaleLabel.make(~display=true, ~labelString="Grade", ()),
         (),
       )
     ),
@@ -27,7 +26,6 @@ let makeChart = (title, datasets) => {
         ~distribution=`linear,
         ~time=Time.make(~round=true, ~_unit="day", ()),
         ~display=true,
-        ~scaleLabel=ScaleLabel.make(~display=true, ~labelString="Date", ()),
         (),
       )
     ),
