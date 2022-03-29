@@ -8,7 +8,7 @@
   "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
   "name": "regenesis-chart",
   "namespace": true,
-  "package-specs": [{"in-source": false, "module": "commonjs"}],
+  "package-specs": [{"in-source": false, "module": "es6"}],
   "reason": {"react-jsx": 3},
   "refmt": 3,
   "sources": {"dir": "src", "subdirs": true},

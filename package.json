@@ -4,12 +4,12 @@
   "scripts": {
     "build": "bsb -make-world",
     "start": "bsb -make-world -w -ws _ ",
-    "clean": "bsb -clean-world",
+    "clean": "bsb -clean-world && rm -rf dist",
     "prestart": "npm run clean",
     "prebuild": "npm run clean",
     "prebundle": "npm run build",
-    "bundle": "webpack",
-    "server": "moduleserve ./ --port 8000",
+    "bundle": "webpack build",
+    "server": "webpack serve",
     "test": "echo \"no test specified\" && exit 0"
   },
   "keywords": [
@@ -22,12 +22,13 @@
   "devDependencies": {
     "bs-abstract": "^1.0.0",
     "bs-platform": "^7.1.1",
-    "moduleserve": "github:marijnh/moduleserve#7db414e7ea20eb4213e4f98055bfaecc8886e756",
+    "html-webpack-plugin": "^5.5.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "reason-react": ">=0.7.0",
     "webpack": "^5.70.0",
-    "webpack-cli": "^4.9.2"
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
     "@amsross/bs-chartjs": "^3.0.0",
